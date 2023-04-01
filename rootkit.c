@@ -4,7 +4,7 @@
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Amit Katz");
-MODULE_DESCRIPTION("A simple Linux module");
+MODULE_DESCRIPTION("A simple Linux kernel module");
 MODULE_VERSION("1.0");
 
 static int __init rootkit_init(void)
