@@ -1,16 +1,19 @@
+# Rootkit
 A simple Linux kernel module
 
-## Compiling
+
+## Features
+1. Hides the file "`top_secret`" from the `ls` command
+
+## Usage
+
+Compiling and installing:
 ```bash
 $ make
-```
-
-## Installing
-```bash
 $ sudo insmod rootkit.ko
 ```
 
-## Uninstalling
+Uninstall:
 ```bash
 $ sudo rmmod rootkit
 ```
