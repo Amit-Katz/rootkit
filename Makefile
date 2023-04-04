@@ -3,4 +3,4 @@ obj-m += rootkit.o
 all:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
 clean:
-	$(RM) .*.cmd *.o *.symvers -r .tmp* *.order *.mod.c *.mod
+	$(RM) .*.cmd *.o *.symvers -r .tmp* *.order *.mod.c *.mod .*.o.d
