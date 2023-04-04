@@ -9,11 +9,7 @@ typedef unsigned long m_address;
 
 static struct kprobe kp = {.symbol_name = "kallsyms_lookup_name"};
 
-#define USE_FENTRY_OFFSET 0
-
-#if !USE_FENTRY_OFFSET
 #pragma GCC optimize("-fno-optimize-sibling-calls")
-#endif
 
 struct ftrace_hook
 {
@@ -40,10 +36,6 @@ static int fh_resolve_hook_address(struct ftrace_hook *hook)
         return -ENOENT;
 
     *((m_address *)hook->original) = hook->address;
-
-#if USE_FENTRY_OFFSET
-    *((m_address *)hook->original) += MCOUNT_INSN_SIZE;
-#endif
 
     return 0;
 }
